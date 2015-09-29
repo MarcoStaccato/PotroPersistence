@@ -7,29 +7,18 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "ARTICULO")
 public class Articulo extends ElementoConId implements Serializable{
 	
     private static final long serialVersionUID = 1L;
-    @Id
-    @Column(name = "ID")
-    private Integer id;
-    
-    @Column(name = "NOMBRE")
+    private Integer id_Articulo;
     private String nombre;
-    
-    @Column(name = "DESCRIPCION")
-    private String descripcion;
-    
-    @Column(name = "PRECIO")
+	private String descripcion;
     private double precio;
-    
-    @Column(name = "IDDEPARTAMENTO")
     private int iddepartamento;
  
     public Articulo(String descripcion, Integer id,String nombre,double precio, int iddepartamento) {
 		super(descripcion, id);
+		this.id_Articulo=id;
 		this.nombre=nombre;
 		this.iddepartamento=iddepartamento;
 		this.precio=precio;
@@ -58,7 +47,21 @@ public class Articulo extends ElementoConId implements Serializable{
 	public void setIddepartamento(int iddepartamento) {
 		this.iddepartamento = iddepartamento;
 	}
-    
+	public Integer getId_Articulo() {
+		return id_Articulo;
+	}
+
+	public void setId_Articulo(Integer id_Articulo) {
+		this.id_Articulo = id_Articulo;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}   
 
   
     

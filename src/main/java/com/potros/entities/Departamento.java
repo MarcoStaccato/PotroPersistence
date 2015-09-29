@@ -16,15 +16,13 @@ public class Departamento extends ElementoConId implements Serializable {
     private ArrayList <Articulo> articulos ;
     
 	private static final long serialVersionUID = 1L;
-    @Id
-    @Column(name = "ID")
-    private Integer id;
-
-    @Column(name = "NOMBRE")
+    private Integer id_depto;
     private String nombre;
     
     public Departamento(String descripcion, Integer id) {
 		super(descripcion, id);
+		this.id_depto=id;
+		this.nombre=descripcion;
 		// TODO Auto-generated constructor stub
 	}
  
@@ -37,11 +35,11 @@ public class Departamento extends ElementoConId implements Serializable {
     }
 
     public int getId() {
-        return id;
+        return id_depto;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.id_depto = id;
     }
 
     public String getNombre() {
@@ -50,11 +48,6 @@ public class Departamento extends ElementoConId implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    @Override
-    public String toString() {
-        return "Departamento[ id=" + id + " ]";
     }
     
 }

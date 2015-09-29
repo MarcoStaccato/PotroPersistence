@@ -8,21 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "FACTURA")
+
 public class Factura implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    @Column(name = "ID")
     private Integer id;
-
-    @Column(name = "IDCOMPRA")
     private int idcompra;
-
-    @Column(name = "IDUSUARIO")
     private int idusuario;
-
-    @Column(name = "FECHA")
     private Date fecha;
 
     public Factura() {
