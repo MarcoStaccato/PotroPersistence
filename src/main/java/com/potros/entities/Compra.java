@@ -8,72 +8,56 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "COMPRA")
 public class Compra implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Column(name = "IDCOMPRA")
-    private Integer idcompra;
-    
-    @Column(name = "IDARTICULO")
-    private int idarticulo;
+	private static final long serialVersionUID = 1L;
 
-    @Column(name = "CANTIDAD")
-    private int cantidad;
+	private Integer idcompra;
+	private RenglonCarritoInmutable[] datos;
+	private Date fecha;
+	private Usuario usuario;
 
-    @Column(name = "FECHA")
-    private Date fecha;
+	public Compra(Integer idcompra, Date fec, Carrito car, Usuario usu) {
+		this.idcompra = idcompra;
+		this.fecha = fec;
+		// llenar los renglones del carrito
+		this.usuario = usu;
+	}
 
-    public Compra() {
-    }
+	public Integer getIdcompra() {
+		return idcompra;
+	}
 
-    public Compra(Integer idcompra) {
-        this.idcompra = idcompra;
-    }
+	public void setIdcompra(Integer idcompra) {
+		this.idcompra = idcompra;
+	}
 
-    public Compra(Integer idcompra, int idarticulo, int cantidad, Date fecha) {
-        this.idcompra = idcompra;
-        this.idarticulo = idarticulo;
-        this.cantidad = cantidad;
-        this.fecha = fecha;
-    }
+	public int getIdarticulo() {
+		return idarticulo;
+	}
 
-    public Integer getIdcompra() {
-        return idcompra;
-    }
+	public void setIdarticulo(int idarticulo) {
+		this.idarticulo = idarticulo;
+	}
 
-    public void setIdcompra(Integer idcompra) {
-        this.idcompra = idcompra;
-    }
+	public int getCantidad() {
+		return cantidad;
+	}
 
-    public int getIdarticulo() {
-        return idarticulo;
-    }
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
+	}
 
-    public void setIdarticulo(int idarticulo) {
-        this.idarticulo = idarticulo;
-    }
+	public Date getFecha() {
+		return fecha;
+	}
 
-    public int getCantidad() {
-        return cantidad;
-    }
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
+	@Override
+	public String toString() {
+		return "Compra[ idcompra=" + idcompra + " ]";
+	}
 
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    @Override
-    public String toString() {
-        return "Compra[ idcompra=" + idcompra + " ]";
-    }
-    
 }
