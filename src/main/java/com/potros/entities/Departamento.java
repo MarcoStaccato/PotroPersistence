@@ -1,41 +1,45 @@
 package com.potros.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name = "DEPARTAMENTO")
-public class Departamento implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Column(name = "ID")
-    private Integer id;
-
-    @Column(name = "NOMBRE")
+public class Departamento extends ElementoConId implements Serializable {
+    
+    private ArrayList <Articulo> articulos ;
+    
+	private static final long serialVersionUID = 1L;
+    private Integer id_depto;
     private String nombre;
-
-    public Departamento() {
+    
+    public Departamento(String descripcion, Integer id) {
+		super(descripcion, id);
+		this.id_depto=id;
+		this.nombre=descripcion;
+		// TODO Auto-generated constructor stub
+	}
+ 
+    public void agregarArticulo(Articulo a){
+    	articulos.add(a);
+    }
+    
+    public void eliminaArticulo(Articulo a){
+    	articulos.remove(a);
     }
 
-    public Departamento(Integer id) {
-        this.id = id;
-    }
-
-    public Departamento(Integer id, String nombre) {
-        this.id = id;
-        this.nombre = nombre;
-    }
-
-    public Integer getId() {
-        return id;
+    public int getId() {
+        return id_depto;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.id_depto = id;
     }
 
     public String getNombre() {
@@ -44,11 +48,6 @@ public class Departamento implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    @Override
-    public String toString() {
-        return "Departamento[ id=" + id + " ]";
     }
     
 }
