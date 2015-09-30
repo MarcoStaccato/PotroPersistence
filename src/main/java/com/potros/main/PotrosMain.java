@@ -74,21 +74,21 @@ public class PotrosMain {
 		
 		System.out.print("Compra: "+comp.toString());
 	    
-		System.out.println();
+		System.out.println("\n Usuarios:");
 		
 		List usuarios= userDAO.findAll();
 		for(int i=0;i < usuarios.size(); i++){
 			System.out.print(((Usuario)usuarios.get(i)).getNombre()+" ");
 		}
 
-		System.out.println();
+		System.out.println("\n Articulos:");
 		
 		List articulos= articuloDAO.findAll();
 		for(int i=0;i < articulos.size(); i++){
 			System.out.print(((Articulo)articulos.get(i)).getDescripcion()+" ");
 		}
 		
-		System.out.println();
+		System.out.println("\n Departamentos:");
 		
 		List departamentos= departamentoDAO.findAll();
 		for(int i=0;i < departamentos.size(); i++){
