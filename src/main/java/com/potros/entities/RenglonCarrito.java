@@ -1,6 +1,6 @@
 package com.potros.entities;
 
-class RenglonCarrito extends RenglonCarritoInmutable {
+public class RenglonCarrito extends RenglonCarritoInmutable {
 
 	public RenglonCarrito(Articulo art, int cant) {
 		super(art, cant);

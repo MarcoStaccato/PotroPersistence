@@ -3,7 +3,7 @@ package com.potros.persistence;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class GenericDAO<T> {
+public class GenericDAO<T> {
 	
 	private List<T> listEntities = new ArrayList<T>();
 
