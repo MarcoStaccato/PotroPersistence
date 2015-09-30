@@ -1,21 +1,16 @@
 package com.potros.persistence;
 
+import java.util.ArrayList;
 import java.util.List;
-import org.hibernate.Query;
-import org.hibernate.Session;
 
-public abstract class GenericDAO<T> {
-	protected final Class<?> clazz = this.getClazz();
-
-	public abstract Class<?> getClazz();
-
-	private Session session = HibernateUtil.getSessionFactory().openSession();
+public class GenericDAO<T> {
+	
+	private List<T> listEntities = new ArrayList<T>();
 
 	public boolean persist(T entity) {
 		try {
-			session.beginTransaction();
-			session.save(entity);
-			session.getTransaction().commit();
+			System.out.println("Guardando objeto" + entity.toString());
+			listEntities.add(entity);
 			return true;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -28,9 +23,12 @@ public abstract class GenericDAO<T> {
 			return false;
 		}
 		try {
-			session.beginTransaction();
-			session.merge(entity);
-			session.getTransaction().commit();
+			System.out.println("Actualizando objeto" + entity.toString());
+			if (listEntities.contains(entity)) {
+				int index = listEntities.indexOf(entity);
+				listEntities.remove(index);
+				listEntities.add(index, entity);
+			}
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -39,7 +37,11 @@ public abstract class GenericDAO<T> {
 
 	public T findById(int id) {
 		try {
-			return (T) session.get(getClazz(), id);
+			if (listEntities.get(id) != null) {
+				return listEntities.get(id);
+			}else{
+				return null;
+			}
 		} catch (Exception e) {
 			return null;
 		}
@@ -50,10 +52,7 @@ public abstract class GenericDAO<T> {
 			return false;
 		}
 		try {
-			session.beginTransaction();
-			session.delete(entity);
-			session.getTransaction().commit();
-			return true;
+			return listEntities.remove(entity);
 		} catch (Exception e) {
 			return false;
 		}
@@ -62,19 +61,13 @@ public abstract class GenericDAO<T> {
 	public boolean removeById(int id) {
 		boolean isSuccess = false;
 		try {
-			T entity = (T) session.get(getClazz(), id);
-			session.beginTransaction();
-			isSuccess = remove(entity);
-			session.getTransaction().commit();
-			return isSuccess;
+			return listEntities.remove(listEntities.get(id));
 		} catch (Exception e) {
 			return false;
 		}
 	}
 
 	public List<T> findAll() {
-		Query q = session.createQuery("From USUARIO");
-		List<T> resultList = (List<T>) q.list();
-		return resultList;
+		return listEntities;
 	}
 }
