@@ -32,6 +32,9 @@ public class PotrosMain {
 		accesorios = new Departamento("accesorios",3);
 		
 		//persist depto
+		departamentoDAO.persist(armas);
+		departamentoDAO.persist(armaduras);
+		departamentoDAO.persist(accesorios);
 		
 		Articulo art1,art2,art3;
 		art1 = new Articulo("art1",1,"espada",20000,1);
@@ -42,6 +45,10 @@ public class PotrosMain {
 		armaduras.agregarArticulo(art2);
 		accesorios.agregarArticulo(art3);
 		//persist articulos
+		articuloDAO.persist(art1);
+		articuloDAO.persist(art2);
+		articuloDAO.persist(art3);
+		
 		
 		RenglonCarrito r1,r2,r3;
 		r1 = new RenglonCarrito(art1,1);
@@ -55,12 +62,15 @@ public class PotrosMain {
 		c.agregarArticulo(r3);
 		
 		//persist carrito
+		carritoDAO.persist(c);
 		
 		Compra comp;
 		comp = new Compra(1, new Date(System.currentTimeMillis()),c,c.getUsuario());
 		
 		//persist compra
+		compraDAO.persist(comp);
 		
-		System.out.println("Compra");
+		System.out.print("Compra: "+comp.toString());
+	    
 	}
 }

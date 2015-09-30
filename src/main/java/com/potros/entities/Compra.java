@@ -49,7 +49,7 @@ public class Compra implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Compra[ idcompra=" + idcompra + " ]";
+		return "Compra[ idcompra=" + idcompra + " ]"+datos.get(0).getArticulo().getDescripcion();
 	}
 
 }
