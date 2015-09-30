@@ -26,6 +26,8 @@ public class PotrosMain {
 		userDAO.persist(us3);
 		System.out.println("***persisted users*** "+us1.getNombre()+"*"+us2.getNombre()+"*"+us3.getNombre()+"*");
 		
+		
+		
 		Departamento armas,armaduras,accesorios;
 		armas = new Departamento("armas",1);
 		armaduras = new Departamento("armaduras",2);
@@ -72,5 +74,29 @@ public class PotrosMain {
 		
 		System.out.print("Compra: "+comp.toString());
 	    
+		System.out.println();
+		
+		List usuarios= userDAO.findAll();
+		for(int i=0;i < usuarios.size(); i++){
+			System.out.print(((Usuario)usuarios.get(i)).getNombre()+" ");
+		}
+
+		System.out.println();
+		
+		List articulos= articuloDAO.findAll();
+		for(int i=0;i < articulos.size(); i++){
+			System.out.print(((Articulo)articulos.get(i)).getDescripcion()+" ");
+		}
+		
+		System.out.println();
+		
+		List departamentos= departamentoDAO.findAll();
+		for(int i=0;i < departamentos.size(); i++){
+			System.out.print(((Departamento)departamentos.get(i)).getDescripcion()+" ");
+		}
+		
+		System.out.println();
+		
+		
 	}
 }
