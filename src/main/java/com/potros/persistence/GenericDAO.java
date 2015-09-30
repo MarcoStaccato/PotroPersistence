@@ -3,11 +3,18 @@ package com.potros.persistence;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.potros.exception.ElementNotFoundException;
+import com.potros.exception.InvalidDataException;
+import com.potros.exception.UserNotFoundException;
+
 public class GenericDAO<T> {
 	
 	private List<T> listEntities = new ArrayList<T>();
 
 	public boolean persist(T entity) {
+		if(entity == null){
+			throw new UserNotFoundException();
+		}
 		try {
 			System.out.println("Guardando objeto" + entity.toString());
 			listEntities.add(entity);
@@ -20,7 +27,7 @@ public class GenericDAO<T> {
 
 	public boolean merge(T entity) {
 		if (entity == null) {
-			return false;
+			throw new UserNotFoundException();
 		}
 		try {
 			System.out.println("Actualizando objeto" + entity.toString());
@@ -40,7 +47,7 @@ public class GenericDAO<T> {
 			if (listEntities.get(id) != null) {
 				return listEntities.get(id);
 			}else{
-				return null;
+				throw new ElementNotFoundException();
 			}
 		} catch (Exception e) {
 			return null;
@@ -49,7 +56,7 @@ public class GenericDAO<T> {
 
 	public boolean remove(T entity) {
 		if (entity == null) {
-			return false;
+			throw new InvalidDataException();
 		}
 		try {
 			return listEntities.remove(entity);
@@ -59,7 +66,9 @@ public class GenericDAO<T> {
 	}
 
 	public boolean removeById(int id) {
-		boolean isSuccess = false;
+		if (id<0) {
+			throw new ElementNotFoundException();
+		}
 		try {
 			return listEntities.remove(listEntities.get(id));
 		} catch (Exception e) {
