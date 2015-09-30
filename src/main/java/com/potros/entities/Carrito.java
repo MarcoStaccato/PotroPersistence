@@ -36,4 +36,12 @@ public class Carrito {
 	public ArrayList<RenglonCarrito> getCompra() {
 		return datos;
 	}
+	
+	public void setUsuario(Usuario u){
+		this.usuario=u;
+	}
+	
+	public Usuario getUsuario(){
+		return this.usuario;
+	}
 }
