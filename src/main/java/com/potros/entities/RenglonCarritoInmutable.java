@@ -9,6 +9,7 @@ public class RenglonCarritoInmutable {
 		this.cantidad=cant;
 	}
 	
+	
 	public Articulo getArticulo(){
 		return this.articulo;
 	}

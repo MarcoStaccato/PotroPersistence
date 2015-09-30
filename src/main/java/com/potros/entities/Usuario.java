@@ -7,60 +7,42 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "USUARIO")
-public class Usuario implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Column(name = "ID")
-    private Integer id;
-    
-    @Column(name = "NOMBRE")
-    private String nombre;
-    
-    @Column(name = "PASS")
-    private String pass;
+public class Usuario extends ElementoConId implements Serializable {
 
-    public Usuario() {
-    }
+	private static final long serialVersionUID = 1L;
+	private String nombre;
+	private String password;
+	private int edad;
 
-    public Usuario(Integer id) {
-        this.id = id;
-    }
+	
+	public Usuario(String descripcion, Integer id, String nombre, String pass, int edad) {
+		super(id, descripcion);
+		this.nombre = nombre;
+		this.password = pass;
+		this.edad = edad;
+	}
 
-    public Usuario(Integer id, String nombre, String pass) {
-        this.id = id;
-        this.nombre = nombre;
-        this.pass = pass;
-    }
+	public String getNombre() {
+		return nombre;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public String getNombre() {
-        return nombre;
-    }
+	public void setPassword(String pass) {
+		this.password = pass;
+	}
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+	public int getEdad() {
+		return this.edad;
+	}
 
-    public String getPass() {
-        return pass;
-    }
-
-    public void setPass(String pass) {
-        this.pass = pass;
-    }
-
-    @Override
-    public String toString() {
-        return "Usuario[ id=" + id + " ]";
-    }
-    
+	public void setEdad(int ed) {
+		this.edad = ed;
+	}
 }
