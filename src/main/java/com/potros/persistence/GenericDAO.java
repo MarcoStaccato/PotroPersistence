@@ -1,21 +1,23 @@
 package com.potros.persistence;
 
+import java.util.ArrayList;
 import java.util.List;
-import org.hibernate.Query;
-import org.hibernate.Session;
 
-public abstract class GenericDAO<T> {
-	protected final Class<?> clazz = this.getClazz();
+import com.potros.exception.ElementNotFoundException;
+import com.potros.exception.InvalidDataException;
+import com.potros.exception.UserNotFoundException;
 
-	public abstract Class<?> getClazz();
-
-	private Session session = HibernateUtil.getSessionFactory().openSession();
+public class GenericDAO<T> {
+	
+	private List<T> listEntities = new ArrayList<T>();
 
 	public boolean persist(T entity) {
+		if(entity == null){
+			throw new UserNotFoundException();
+		}
 		try {
-			session.beginTransaction();
-			session.save(entity);
-			session.getTransaction().commit();
+			System.out.println("Guardando objeto" + entity.toString());
+			listEntities.add(entity);
 			return true;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -25,12 +27,15 @@ public abstract class GenericDAO<T> {
 
 	public boolean merge(T entity) {
 		if (entity == null) {
-			return false;
+			throw new UserNotFoundException();
 		}
 		try {
-			session.beginTransaction();
-			session.merge(entity);
-			session.getTransaction().commit();
+			System.out.println("Actualizando objeto" + entity.toString());
+			if (listEntities.contains(entity)) {
+				int index = listEntities.indexOf(entity);
+				listEntities.remove(index);
+				listEntities.add(index, entity);
+			}
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -39,7 +44,11 @@ public abstract class GenericDAO<T> {
 
 	public T findById(int id) {
 		try {
-			return (T) session.get(getClazz(), id);
+			if (listEntities.get(id) != null) {
+				return listEntities.get(id);
+			}else{
+				throw new ElementNotFoundException();
+			}
 		} catch (Exception e) {
 			return null;
 		}
@@ -47,34 +56,27 @@ public abstract class GenericDAO<T> {
 
 	public boolean remove(T entity) {
 		if (entity == null) {
-			return false;
+			throw new InvalidDataException();
 		}
 		try {
-			session.beginTransaction();
-			session.delete(entity);
-			session.getTransaction().commit();
-			return true;
+			return listEntities.remove(entity);
 		} catch (Exception e) {
 			return false;
 		}
 	}
 
 	public boolean removeById(int id) {
-		boolean isSuccess = false;
+		if (id<0) {
+			throw new ElementNotFoundException();
+		}
 		try {
-			T entity = (T) session.get(getClazz(), id);
-			session.beginTransaction();
-			isSuccess = remove(entity);
-			session.getTransaction().commit();
-			return isSuccess;
+			return listEntities.remove(listEntities.get(id));
 		} catch (Exception e) {
 			return false;
 		}
 	}
 
 	public List<T> findAll() {
-		Query q = session.createQuery("From USUARIO");
-		List<T> resultList = (List<T>) q.list();
-		return resultList;
+		return listEntities;
 	}
 }

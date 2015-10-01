@@ -7,45 +7,43 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 public class Usuario extends ElementoConId implements Serializable {
-    
+
 	private static final long serialVersionUID = 1L;
-    private Integer id_usuario;
-    private String nombre;
-    private String pass;
+	private String nombre;
+	private String password;
+	private int edad;
 
-   
-    public Usuario(String descripcion, Integer id,String nombre, String pass) {
-		super(descripcion, id);
-		this.id_usuario = id;
-        this.nombre = nombre;
-        this.pass = pass;
+	
+	public Usuario(String descripcion, Integer id, String nombre, String pass, int edad) {
+		super(id, descripcion);
+		this.nombre = nombre;
+		this.password = pass;
+		this.edad = edad;
 	}
-    
 
-    public int getId() {
-        return id_usuario;
-    }
+	public String getNombre() {
+		return nombre;
+	}
 
-    public void setId(Integer id) {
-        this.id_usuario = id;
-    }
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-    public String getNombre() {
-        return nombre;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+	public void setPassword(String pass) {
+		this.password = pass;
+	}
 
-    public String getPass() {
-        return pass;
-    }
+	public int getEdad() {
+		return this.edad;
+	}
 
-    public void setPass(String pass) {
-        this.pass = pass;
-    }
-    
+	public void setEdad(int ed) {
+		this.edad = ed;
+	}
+
 }
