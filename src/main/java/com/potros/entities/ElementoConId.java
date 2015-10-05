@@ -4,6 +4,7 @@ package com.potros.entities;
 public class ElementoConId {
 	protected Integer id;
 	protected String descripcion;
+	private int unIntparaCommit;
 	
 	public ElementoConId(Integer id, String descripcion){
 		this.id=id;
@@ -17,4 +18,5 @@ public class ElementoConId {
 	public String getDescripcion(){
 		return this.descripcion;
 	}
+	
 }
